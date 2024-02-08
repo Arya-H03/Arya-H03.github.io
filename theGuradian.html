@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>The Guardian</title>
+
+    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+
+    <script src="./js/main.js"></script>
+
+</head>
+
+<body>
+
+    <header>
+
+
+        <div id="brand">
+            <h1> The Guardian</h1>
+        </div>
+
+        <nav>
+            <ul>
+                <li class="otherPages"><a id="Phighlight" href="./home.html">Home</a></li>
+                <li class="otherPages"><a id="Ohighlight" href="./CV.pdf">CV</a></li>
+                <li class="otherPages"><a id="Ohighlight" href="https://github.com/Arya-H03"><img
+                            src="./media/GithubIcon.png"></a></li>
+                <li class="otherPages"><a id="Ohighlight"
+                        href="https://www.linkedin.com/in/seyed-arya-hosseini-aa27b22ab/"><img
+                            src="./media/linkedinIcon.png"></a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <div class="container">
+
+        <div class="projectDescription">
+
+            <p>The Guardian, my personal 2D platformer project, signifies my Unity development journey. It encapsulates
+                knowledge
+                gained during my study program. While developing the game, I diligently rectified coding errors and
+                enhanced the
+                structure, emphasizing not only innovation but a commitment to continuous improvement. This project
+                serves as a showcase
+                for my proficiency in Unity and C#, demonstrating a deepened skill set. This project allowed me to
+                channel my passion
+                for game development
+                into
+                a tangible and innovative creation, highlighting my dedication to mastering the intricacies of 2D game
+                design within
+                the
+                Unity engine.</p>
+
+        </div>
+
+        <ul class="listOfTopics">
+            <li class="topicBox">
+
+                <div class="topicDescirption1">
+                    <h2>Player Movement</h2>
+                    <p>
+                        In designing the player experience for my game, my focus was on creating a responsive and
+                        dynamic character. I
+                        utilized
+                        the Unity Input System to ensure precise and fluid player controls. To enhance gameplay
+                        verticality, I implemented a
+                        jumping system enriched with immersive sound effects and visual effects.
+                    </p>
+
+                </div>
+
+                <div class="topicVisual1">
+
+                    <div class="videoContainer">
+
+                        <video controls>
+                            <source src="./media/TheGuardian/MovementShowcase.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                </div>
+
+            </li>
+
+            <li class="topicBox">
+                <div class="topicDescirption2">
+                    <h2>Player Combat</h2>
+                    <p>
+                        Diversifying the player's combat capabilities, I incorporated three distinct attacks, each
+                        accompanied by
+                        visual and sound effects. The implementation includes accurate hit boxes to ensure a satisfying
+                        and strategic combat experience.
+                    </p>
+                    <p>
+                        A standout feature is the parry mechanic, providing players with the ability to deflect enemy
+                        attacks and
+                        projectiles. This strategic maneuver adds depth to the gameplay, requiring skillful timing and
+                        contributing to an
+                        engaging and rewarding player experience.
+                    </p>
+
+                </div>
+
+                <div class="topicVisual2">
+
+                    <div class="videoContainer" id="TGPlayerCombat">
+
+                        <video controls>
+                            <source src="./media/TheGuardian/CombatShowcase.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                </div>
+            </li>
+
+            <li class="topicBox">
+                <div class="topicDescirption1">
+                    <h2>Enemy Design</h2>
+                    <p>
+                        In shaping the design of enemies for my game, my focus was on establishing an organized and
+                        flexible structure that
+                        facilitates the seamless development of future enemy types. To achieve this, I employed the
+                        principle of
+                        inheritance, creating a framework that allows for the easy extension and customization of enemy
+                        types.
+
+                        Recognizing the need for a systematic approach to enemy behaviors, I implemented a state machine
+                        for each enemy type.
+                        This choice enables a clear and modular organization of enemy actions, fostering a coherent and
+                        adaptable
+                        system. By incorporating inheritance and a state machine, the enemy design not only meets
+                        current objectives but
+                        also lays the foundation for a scalable and expandable roster of enemies in the evolving
+                        development of the game.
+                    </p>
+
+                </div>
+
+                <div class="topicVisual1">
+
+                    <div class="videoContainer" id="TGEnemyDesign">
+
+                        <video controls>
+                            <source src="./media/TheGuardian/MinionShowcase.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="videoContainer" id="TGEnemyDesign">
+
+                        <video controls>
+                            <source src="./media/TheGuardian/KnightShowcase.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                </div>
+
+
+            </li>
+
+            <li class="topicBox">
+                <div class="topicDescirption2">
+                    <h2>Interaction System</h2>
+                    <p>
+
+                        In designing the Interaction System, the primary objective was to empower players with a
+                        versatile tool for engaging with diverse elements within the game, including item pickups, NPC
+                        interactions, and textual readings. To achieve this, I developed a dynamic system, leveraging
+                        the efficiency of delegates and events. This not only ensures seamless interaction handling but
+                        also establishes a foundation for scalability, allowing the feature to evolve alongside the
+                        gameplay dynamics.
+                    </p>
+
+                </div>
+
+                <div class="topicVisual2">
+
+                    <div class="videoContainer" id="TGPlayerCombat">
+
+                        <video controls>
+                            <source src="./media/TheGuardian/InteractionShowcase.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </li>
+
+            <li class="topicBox">
+                <div class="topicDescirption1">
+                    <h2>Raytracing</h2>
+                    <p>
+                    
+                        In this project, I leveraged ray tracing to enhance both combat mechanics and audio immersion. Utilizing ray
+                        tracing, I ensured precise hitboxes for player attacks, elevating the combat experience with accurate collision
+                        detection. Additionally, I designed footsteps sound system which, dynamically generates distinct sounds
+                        based on the ground type. This innovative approach employs ray tracing to detect the surface beneath, providing
+                        players with an immersive auditory experience tied intricately to the in-game environment.
+                    </p>
+
+                </div>
+
+                <div class="topicVisual1">
+
+                    <div class="videoContainer">
+
+                        <video controls>
+                            <source src="./media/TheGuardian/FootstepsShowcase.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                </div>
+
+
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="footer">
+        <p> &copy; BY Seyed Arya Hosseini.</p>
+    </div>
+
+</body>
+
+
+</html>
