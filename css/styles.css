@@ -219,6 +219,7 @@ nav img{
 
 .topicVisual1{
 
+    margin-top: 50px;
     width: 70%;
     float: right;
 }
@@ -251,6 +252,7 @@ nav img{
 
 .topicVisual2{
 
+    margin-top: 50px;
     width: 70%;
     float: left;
 }
@@ -284,9 +286,16 @@ video {
   float: left;
 }
 
+#PZloadout .videoContainer {
+
+    margin-right: 50px;
+    width: 45%;
+    float: left;
+}
 
 .videoContainer {
 
+    
     width: 75%;
     float: inline-end;
 
