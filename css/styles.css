@@ -464,6 +464,24 @@ video {
     position: relative;
 }
 
+#PlayGame {
+    width: 125px;
+    height: 50px;
+    margin: 0 auto; 
+    background-color: rgb(213, 182, 6);;
+    border-radius: 5px;
+    
+}
+
+#PlayGame a{
+
+    color: #ffffff;
+    font-size: 28px;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
+    text-decoration: none;
+}
 
 
 
