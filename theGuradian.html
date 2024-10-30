@@ -63,7 +63,7 @@
         <ul class="listOfTopics">
 
             <li class="topicBox" id="SAInput">
-                <div class="topicDescirption1" >
+                <div class="topicDescirption1">
                     <h2>Player Movement</h2>
                     <p>
                         The player movement system is designed to deliver smooth, seamless transitions between various
@@ -83,23 +83,23 @@
 
                 <div class="topicVisual1">
 
-                   
-                    
+
+
                     <img class="twoImagesOnRight" src="./media/TheGuardian/PlayerAnimator.png">
                     <div class="videoContainer">
-                        
+
                         <video controls>
                             <source src="./media/TheGuardian/MovementShowcase.mp4" type="video/mp4">
                         </video>
                     </div>
-                    
+
 
 
                 </div>
             </li>
 
-            
-        
+
+
 
             <li class="topicBox">
                 <div class="topicDescirption2">
@@ -135,38 +135,26 @@
                 <div class="topicDescirption1">
                     <h2>Enemy Design</h2>
                     <p>
-                        In shaping the design of enemies for my game, my focus was on establishing an organized and
-                        flexible structure that
-                        facilitates the seamless development of future enemy types. To achieve this, I employed the
-                        principle of
-                        inheritance, creating a framework that allows for the easy extension and customization of enemy
-                        types.
+                        Much like the player character, I implemented a controller for enemy behavior that allowed
+                        smooth transitions between isolated states by leveraging a state machine and state design
+                        pattern. This approach enabled a clear structure for managing various enemy states, such as
+                        idle, attack, and pursuit, while keeping behaviors modular and easy to debug.
 
-                        Recognizing the need for a systematic approach to enemy behaviors, I implemented a state machine
-                        for each enemy type.
-                        This choice enables a clear and modular organization of enemy actions, fostering a coherent and
-                        adaptable
-                        system. By incorporating inheritance and a state machine, the enemy design not only meets
-                        current objectives but
-                        also lays the foundation for a scalable and expandable roster of enemies in the evolving
-                        development of the game.
+                        To support future expansion, I built the enemy framework using inheritance, allowing for easy
+                        customization and extension. Currently, only one enemy variant exists in the game, but this
+                        flexible, scalable design ensures that new types can be integrated seamlessly as development
+                        continues. This organized structure not only addresses current gameplay needs but also sets the
+                        groundwork for an adaptable and diverse enemy roster.
                     </p>
 
                 </div>
 
                 <div class="topicVisual1">
 
-                    <div class="videoContainer" id="TGEnemyDesign">
+                    <div class="videoContainer">
 
                         <video controls>
-                            <source src="./media/TheGuardian/MinionShowcase.mp4" type="video/mp4">
-                        </video>
-                    </div>
-
-                    <div class="videoContainer" id="TGEnemyDesign">
-
-                        <video controls>
-                            <source src="./media/TheGuardian/KnightShowcase.mp4" type="video/mp4">
+                            <source src="./media/TheGuardian/EnemyShowcase.mp4" type="video/mp4">
                         </video>
                     </div>
 
@@ -175,6 +163,7 @@
 
             </li>
 
+            <!-- 
             <li class="topicBox">
                 <div class="topicDescirption2">
                     <h2>Interaction System</h2>
@@ -232,6 +221,7 @@
 
 
             </li>
+            -->
         </ul>
 
     </div>
