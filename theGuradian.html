@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>The Guardian</title>
+    <title>Sanctum of Sorrow</title>
 
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
 
@@ -13,55 +13,51 @@
 
 <body>
 
-    
+
 
 
     <div class="container">
         <header>
-        
-        <div id="brand">
-            <h1> The Guardian</h1>
-        </div>
 
-        <nav>
-            <ul>
-                <li class="otherPages"><a id="Ghighlight" href="./home.html">Home</a></li>
-                <li class="otherPages"><a id="Phighlight" href="./CV.pdf " target="_blank">CV</a></li>
-                <li class="otherPages"><a id="Ohighlight" href="https://github.com/Arya-H03"><img
-                            src="./media/GithubIcon.png"></a></li>
-                <li class="otherPages"><a id="Ohighlight"
-                        href="https://www.linkedin.com/in/seyed-arya-hosseini-aa27b22ab/"><img
-                            src="./media/linkedinIcon.png"></a></li>
-            </ul>
-        </nav>
+            <div id="brand">
+                <h1> Sanctum of Sorrow</h1>
+            </div>
 
-    </header>
+            <nav>
+                <ul>
+                    <li class="otherPages"><a id="Ghighlight" href="./home.html">Home</a></li>
+                    <li class="otherPages"><a id="Phighlight" href="./CV.pdf " target="_blank">CV</a></li>
+                    <li class="otherPages"><a id="Ohighlight" href="https://github.com/Arya-H03"><img
+                                src="./media/GithubIcon.png"></a></li>
+                    <li class="otherPages"><a id="Ohighlight"
+                            href="https://www.linkedin.com/in/seyed-arya-hosseini-aa27b22ab/"><img
+                                src="./media/linkedinIcon.png"></a></li>
+                </ul>
+            </nav>
+
+        </header>
 
 
         <div class="projectDescription">
 
-            <p>The Guardian, my personal 2D platformer project, signifies my Unity development journey. It encapsulates
-                knowledge
-                gained during my study program. While developing the game, I diligently rectified coding errors and
-                enhanced the
-                structure, emphasizing not only innovation but a commitment to continuous improvement. This project
-                serves as a showcase
-                for my proficiency in Unity and C#, demonstrating a deepened skill set. This project allowed me to
-                channel my passion
-                for game development
-                into
-                a tangible and innovative creation, highlighting my dedication to mastering the intricacies of 2D game
-                design within
-                the
-                Unity engine.</p>
+            <p>"Sanctum of Sorrow" is a 2D action-platformer, influenced by the atmosphere and mechanics of Bloodborne,
+                one of my all-time favorite games. The project began as a prototype during my final semester of college,
+                with a primary focus on refining my Unity coding abilities. Since then, I’ve dedicated substantial time
+                to expanding and enhancing the code, implementing new mechanics and polish as my skills grew.
+
+                During my internship at Baobab Games, I delved deeper into Unity development and brought this knowledge
+                into the project. These new techniques, optimizations, and insights helped shape "Sanctum of Sorrow"
+                into a more cohesive and polished experience. Though still in its early development stage, the game
+                stands as a testament to my progress in game development and commitment to creating memorable gameplay.
+                More updates and content are planned as the journey continues.</p>
 
         </div>
 
 
-        <div id = "PlayGame" >
+        <div id="PlayGame">
 
-            <a href="https://arya-h03.itch.io/sanctum-of-sorrow"> Play  </a>
-            
+            <a href="https://arya-h03.itch.io/sanctum-of-sorrow"> Play </a>
+
         </div>
 
         <ul class="listOfTopics">
@@ -70,12 +66,16 @@
                 <div class="topicDescirption1">
                     <h2>Player Movement</h2>
                     <p>
-                        In designing the player experience for my game, my focus was on creating a responsive and
-                        dynamic character. I
-                        utilized
-                        the Unity Input System to ensure precise and fluid player controls. To enhance gameplay
-                        verticality, I implemented a
-                        jumping system enriched with immersive sound effects and visual effects.
+                        The player movement system is designed to deliver smooth, seamless transitions between various
+                        states, including running, jumping, and falling. Achieving this fluidity required implementing a
+                        state pattern design, which allowed each movement state to operate independently. By isolating
+                        each state in this way, I could efficiently debug and monitor specific behaviors, ensuring each
+                        one functioned precisely as intended.
+
+                        Additionally, By utilizing the animator compenent I synchronized character animations with gameplay actions to make every movement
+                        and transition visually clear to the player. This approach created a highly responsive system
+                        where actions felt intuitive and connected. The result is a movement experience that feels
+                        natural and immersive, allowing players to fully engage in the world of "Sanctum of Sorrow."
                     </p>
 
                 </div>
@@ -198,11 +198,15 @@
                 <div class="topicDescirption1">
                     <h2>Raytracing</h2>
                     <p>
-                    
-                        In this project, I leveraged ray tracing to enhance both combat mechanics and audio immersion. Utilizing ray
-                        tracing, I ensured precise hitboxes for player attacks, elevating the combat experience with accurate collision
-                        detection. Additionally, I designed footsteps sound system which, dynamically generates distinct sounds
-                        based on the ground type. This innovative approach employs ray tracing to detect the surface beneath, providing
+
+                        In this project, I leveraged ray tracing to enhance both combat mechanics and audio immersion.
+                        Utilizing ray
+                        tracing, I ensured precise hitboxes for player attacks, elevating the combat experience with
+                        accurate collision
+                        detection. Additionally, I designed footsteps sound system which, dynamically generates distinct
+                        sounds
+                        based on the ground type. This innovative approach employs ray tracing to detect the surface
+                        beneath, providing
                         players with an immersive auditory experience tied intricately to the in-game environment.
                     </p>
 

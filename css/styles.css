@@ -476,11 +476,15 @@ video {
 #PlayGame a{
 
     color: #ffffff;
-    font-size: 28px;
+    font-size: 32px;
     text-align: center;
     line-height: 50px;
     font-weight: bold;
     text-decoration: none;
+}
+
+#PlayGame a:hover{
+	opacity: 0.5;
 }
 
 
