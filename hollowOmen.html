@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hollow Omen</title>
+
+    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+
+    <script src="./js/main.js"></script>
+
+</head>
+
+<body>
+
+
+
+
+    <div class="container">
+        <header>
+
+            <div id="brand">
+                <h1> Hollow Omen</h1>
+            </div>
+
+            <nav>
+                <ul>
+                    <li class="otherPages"><a id="Ghighlight" href="./home.html">Home</a></li>
+                    <li class="otherPages"><a id="Phighlight" href="./CV.pdf " target="_blank">CV</a></li>
+                    <li class="otherPages"><a id="Ohighlight" href="https://github.com/Arya-H03"><img
+                                src="./media/GithubIcon.png"></a></li>
+                    <li class="otherPages"><a id="Ohighlight"
+                            href="https://www.linkedin.com/in/arya-hosseini-aa27b22ab/"><img
+                                src="./media/linkedinIcon.png"></a></li>
+                </ul>
+            </nav>
+
+        </header>
+
+        
+        <div class="gameBtns">
+
+            <ul>
+                <li>
+                    <div id="playBtn">
+
+                        <a href="https://arya-h03.itch.io/hollowomen"> Play </a>
+
+                    </div>
+                </li>
+                <li>
+                    <div id="githubBtn">
+
+                        <a href="https://github.com/Arya-H03/2D-Platformer-"> GitHub </a>
+
+                    </div>
+
+                </li>
+            </ul>
+
+
+        </div>
+
+
+        <div class="projectDescription">
+
+            <p>Hollow Omen is a 2D action-platformer developed as a prototype in my final college semester. It
+                served as a learning project for refining my Unity coding abilities, applying coding designs and
+                principles, working with Unity’s physics engine, and prototyping enemy behaviors using basic AI
+                programming.</p>
+
+        </div>
+
+        <ul class="listOfTopics">
+
+            <li class="topicBox" id="SAInput">
+                <div class="topicDescirption1">
+                    <h2>Player Movement</h2>
+                    <p>
+                        The player movement system delivers smooth, seamless transitions between running, jumping, and
+                        falling by using a state pattern design. This approach isolates each movement state, making
+                        debugging and monitoring more efficient to ensure precise behavior.
+
+                        Additionally, I synchronized character animations with gameplay actions using the Animator
+                        component, creating clear visual feedback for every movement and transition. This resulted in a
+                        highly responsive and intuitive control experience.
+                    </p>
+
+                </div>
+
+                <div class="topicVisual1">
+
+
+
+                    <img class="twoImagesOnRight" src="./media/TheGuardian/PlayerAnimator.png">
+                    <div class="videoContainer">
+
+                        <video controls>
+                            <source src="./media/TheGuardian/MovementShowcase.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+
+
+                </div>
+            </li>
+
+
+
+
+            <li class="topicBox">
+                <div class="topicDescirption2">
+                    <h2>Player Combat</h2>
+                    <p>
+                        For the combat, I have implemented attack options, including a fluid
+                        slash combo, each paired with distinct visual and sound effects for greater impact. Carefully
+                        designed hitboxes improve strike precision, making combat feel strategic and rewarding.
+
+                        A key feature is the parry mechanic, allowing players to deflect enemy attacks and projectiles
+                        with skillful timing.
+
+                    </p>
+
+                </div>
+
+                <div class="topicVisual2">
+
+                    <div class="videoContainer" id="TGPlayerCombat">
+
+                        <video controls>
+                            <source src="./media/TheGuardian/CombatShowcase.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                </div>
+            </li>
+
+            <li class="topicBox">
+                <div class="topicDescirption1">
+                    <h2>Enemy Design</h2>
+                    <p>
+                        Similar to the player, I developed an enemy controller using a state machine and state pattern
+                        to enable smooth transitions between states like idle, attack, and pursuit. This modular design
+                        keeps behaviors organized and easy to debug.
+
+                        To support future growth, the enemy framework is built with inheritance for easy customization
+                        and extension. Although only one enemy variant currently exists, this scalable structure ensures
+                        seamless integration of new types, laying a solid foundation for a diverse enemy roster.
+                    </p>
+
+                </div>
+
+                <div class="topicVisual1">
+
+                    <div class="videoContainer">
+
+                        <video controls>
+                            <source src="./media/TheGuardian/EnemyShowcase.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                </div>
+
+
+            </li>
+
+            <!-- 
+            <li class="topicBox">
+                <div class="topicDescirption2">
+                    <h2>Interaction System</h2>
+                    <p>
+
+                        In designing the Interaction System, the primary objective was to empower players with a
+                        versatile tool for engaging with diverse elements within the game, including item pickups, NPC
+                        interactions, and textual readings. To achieve this, I developed a dynamic system, leveraging
+                        the efficiency of delegates and events. This not only ensures seamless interaction handling but
+                        also establishes a foundation for scalability, allowing the feature to evolve alongside the
+                        gameplay dynamics.
+                    </p>
+
+                </div>
+
+                <div class="topicVisual2">
+
+                    <div class="videoContainer" id="TGPlayerCombat">
+
+                        <video controls>
+                            <source src="./media/TheGuardian/InteractionShowcase.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </li>
+
+            <li class="topicBox">
+                <div class="topicDescirption1">
+                    <h2>Raytracing</h2>
+                    <p>
+
+                        In this project, I leveraged ray tracing to enhance both combat mechanics and audio immersion.
+                        Utilizing ray
+                        tracing, I ensured precise hitboxes for player attacks, elevating the combat experience with
+                        accurate collision
+                        detection. Additionally, I designed footsteps sound system which, dynamically generates distinct
+                        sounds
+                        based on the ground type. This innovative approach employs ray tracing to detect the surface
+                        beneath, providing
+                        players with an immersive auditory experience tied intricately to the in-game environment.
+                    </p>
+
+                </div>
+
+                <div class="topicVisual1">
+
+                    <div class="videoContainer">
+
+                        <video controls>
+                            <source src="./media/TheGuardian/FootstepsShowcase.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                </div>
+
+
+            </li>
+            -->
+        </ul>
+
+    </div>
+
+    <div class="footer">
+        <p> &copy; BY Arya Hosseini.</p>
+        <p> I claim no rights to the assets used within my projects.</p>
+    </div>
+
+</body>
+
+
+</html>

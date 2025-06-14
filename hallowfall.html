@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hallowfall</title>
+
+    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <link href="./prism/prism.css" rel="stylesheet" />
+
+    <script src="./js/main.js"></script>
+
+</head>
+
+<body>
+
+
+
+
+    <div class="container">
+        <header>
+
+            <div id="brand">
+                <h1> Hallowfall</h1>
+            </div>
+
+            <nav>
+                <ul>
+                    <li class="otherPages"><a id="Ghighlight" href="./home.html">Home</a></li>
+                    <li class="otherPages"><a id="Phighlight" href="./CV.pdf " target="_blank">CV</a></li>
+                    <li class="otherPages"><a id="Ohighlight" href="https://github.com/Arya-H03"><img
+                                src="./media/GithubIcon.png"></a></li>
+                    <li class="otherPages"><a id="Ohighlight"
+                            href="https://www.linkedin.com/in/arya-hosseini-aa27b22ab/"><img
+                                src="./media/linkedinIcon.png"></a></li>
+                </ul>
+            </nav>
+
+
+        </header>
+
+        <div class="mainGameplayShowcase">
+
+            <video autoplay controls muted loop playsinline width="100%" style="max-width: 1280px; height: auto;">
+                <source src="./media/Hallowfall/GameplayShowcase.mp4" type="video/mp4">
+
+            </video>
+
+        </div>
+
+        <div class="gameBtns">
+
+            <ul>
+                <li>
+                    <div id="playBtn">
+
+                        <a href="https://arya-h03.itch.io/hallowfall"> Play </a>
+
+                    </div>
+                </li>
+                <li>
+                    <div id="githubBtn">
+
+                        <a href="https://github.com/Arya-H03/TheGuardian"> GitHub </a>
+
+                    </div>
+
+                </li>
+            </ul>
+
+
+        </div>
+
+        <div class="topicContainer">
+
+            <h2>Introduction</h2>
+            <p>Hallowfall is a project created as the groundwork for a 2D roguelike game. Built upon
+                systems adapted from my Hollow Omen project, its primary focus is to refine and scale both the player
+                and
+                enemy controllers into more modular and reusable components. The initial goal was to improve existing
+                mechanics, increase code maintainability, and establish a solid base upon which roguelike gameplay
+                systems could be implemented and expanded ranging from procedural combat interactions to diverse
+                abilities and enemy AI.</p>
+
+        </div>
+
+
+
+        <div class="topicContainer">
+
+            <h2>Player Controller</h2>
+            <p>
+            <ul class="bulletPointList">
+                <li>Implemented a scalable player controller using the State Pattern, with each core behavior (movement,
+                    attacking, parrying, etc.) encapsulated in its own IPlayerState for modularity and
+                    ease of debugging.</li>
+                <li>Centralized PlayerController handles state transitions based on input and gameplay conditions,
+                    promoting separation of concerns and simplified maintenance.</li>
+                <li>Integrated with Unity’s InputManager and AnimatorController to ensure responsive gameplay and
+                    synchronized animation via state-specific triggers and callbacks.</li>
+                <li>Enabled animation-event-driven actions (e.g. hitboxes, sound effects) tied directly to state
+                    changes, improving combat feedback and fluidity.</li>
+                <li>Designed with extensibility in mind, new abilities or mechanics can be added by creating new states
+                    without modifying existing code.</li>
+                <li>Connected to modular systems (MovementManager, CollisionManager, PlayerCamera, etc.) to maintain
+                    clean separation of responsibilities.</li>
+            </ul>
+
+            <ul class="visualDemo">
+                <li>
+                    <div>
+                        <h3>Player State Implementation</h3>
+                        <pre><code class="language-csharp">
+public interface IPlayerState
+{
+    void InitState(PlayerConfig config);
+
+    void OnEnterState();
+
+    void OnExitState();
+
+    void HandleState();
+
+    void SetOnInitializeVariables(PlayerController statesManagerRef);
+}
+
+
+public class PlayerBaseState : MonoBehaviour, IPlayerState
+{
+    protected PlayerStateEnum stateEnum;
+    protected PlayerController playerController;
+
+    public PlayerBaseState()
+    {
+
+    }
+
+    public virtual void InitState(PlayerConfig config)
+    {
+
+    }
+
+    public virtual void Start()
+    {
+        InitState(playerController.PlayerConfig);
+    }
+    public void SetOnInitializeVariables(PlayerController statesManagerRef)
+    {
+        this.playerController = statesManagerRef;
+    }
+    public PlayerStateEnum GetStateEnum()
+    {
+        return stateEnum;
+    }
+    public virtual void OnEnterState()
+    {
+
+    }
+    public virtual void OnExitState()
+    {
+
+    }
+    public virtual void HandleState()
+    {
+
+    }
+}
+
+
+</code></pre>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <h3>State implementation example</h3>
+                        <pre><code class="language-csharp">
+public class PlayerRunState : PlayerBaseState
+{
+    private float runSpeed = 0;
+
+    private AudioSource audioSource;
+    private AudioClip[] groundRunSFX;
+    private AudioClip[] grassRunSFX;
+    private AudioClip[] stoneRunSFX;
+
+    public float RunSpeed { get => runSpeed; set => runSpeed = value; }
+
+    public PlayerRunState()
+    {
+        this.stateEnum = PlayerStateEnum.Run;
+    }
+
+    public override void InitState(PlayerConfig config)
+    {
+        runSpeed = config.runSpeed;
+        groundRunSFX = config.groundSFX;
+        grassRunSFX = config.grassSFX;
+        stoneRunSFX = config.stoneSFX;
+    }
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    public override void OnEnterState()
+    {
+
+        StartRunning();
+    }
+
+    public override void OnExitState()
+    {
+        StopRunning();
+    }
+
+    public override void HandleState()
+    {
+
+
+    }
+
+    public void PlayStepSound()
+    {
+
+        switch (playerController.CurrentFloorType)
+        {
+            case FloorTypeEnum.Ground:
+                AudioManager.Instance.PlayRandomSFX(audioSource, groundRunSFX, 0.1f);
+                break;
+            case FloorTypeEnum.Grass:
+                AudioManager.Instance.PlayRandomSFX(audioSource, grassRunSFX, 0.1f);
+                break;
+            case FloorTypeEnum.Stone:
+                AudioManager.Instance.PlayRandomSFX(audioSource, stoneRunSFX, 0.1f);
+                break;
+        }
+    }
+
+    private void StartRunning()
+    {
+        playerController.PlayerMovementManager.MoveSpeed = RunSpeed;
+        playerController.AnimationController.SetBoolForAnimations("isRunning", true);
+
+
+    }
+
+    private void StopRunning()
+    {
+        playerController.AnimationController.SetBoolForAnimations("isRunning", false);
+
+
+    }
+
+    public void PauseRunningSFX()
+    {
+        if (audioSource.isPlaying)
+        {
+            audioSource.Pause();
+
+        }
+    }
+
+    public void ResumeRunningSFX()
+    {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.UnPause();
+
+        }
+    }
+}
+
+</code></pre>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <h3>Simplified Player Architecture</h3><img src="./media/Hallowfall/PlayerController.png">
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <h3>Player Animation Controller</h3><img src="./media/Hallowfall/AnimationController.png">
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="topicContainer">
+
+            <h2>Enemy AI</h2>
+            <p>
+            <ul class="bulletPointList">
+                <li>Implemented a modular enemy AI system using the State Pattern, mirroring the player's architecture
+                    for consistency and scalability.</li>
+                <li>State transitions are condition-driven (distance to player, cooldowns, etc.), enabling autonomous
+                    decision-making.
+                </li>
+                <li>Shared base states are inherited and extended per enemy type, allowing easy variation in behavior
+                    without duplication.</li>
+                <li>Designed a reusable EnemyAttackState that supports multiple abilities per enemy, validating
+                    conditions
+                    such as range and cooldown before executing.
+                </li>
+                <li>Enemy abilities are coded as ScriptableObjects, allowing for data driven design and quick
+                    iteration, new attacks can be added without modifying core logic.</li>
+                <li>Utilized NavMesh for dynamic pathfinding, obstacle avoidance, and responsive player pursuit in
+                    varied terrain.
+                </li>
+            </ul>
+
+
+            <ul class="visualDemo">
+                <li>
+                    <div>
+                        <h3>Shared AI Across Enemy Types</h3>
+                        <video controls>
+                            <source src="./media/Hallowfall/EnemyAttackShowcase.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <h3>Enemy Path Finding Example</h3>
+                        <video controls>
+                            <source src="./media/Hallowfall/EnemyPathFinding.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="topicContainer">
+
+            <h2>Player Ability System</h2>
+            <p>
+            <ul class="bulletPointList">
+                <li>Designed a modular, data-driven ability system using Unity’s ScriptableObject
+                    for scalability and easy content iteration.</li>
+                <li>Implements a weighted random selection algorithm to offer players randomized upgrade
+                    choices upon level up.</li>
+                <li>Supports both unlocking new abilities and upgrading existing ones, using inheritance and
+                    polymorphism to streamline behavior modifications.</li>
+                <li>Encapsulates ability data (name, description, visuals, logic) and upgrade tiers
+                    within ScriptableObject assets.</li>
+                <li>Ensures separation of data and logic, allowing to balance abilities
+                    without modifying code.</li>
+                <li>Integrates with UI and player progression systems to provide real-time feedback and
+                    seamless selection flow.</li>
+                <li>Built for extensibility, allowing new abilities, effects, and upgrade logic to be added
+                    without altering existing systems.</li>
+            </ul>
+            </p>
+
+
+            <ul class="visualDemo">
+                <li>
+                    <div>
+                        <h3>Code for Player Ability</h3>
+                        <pre><code class="language-csharp">
+public class BaseAbility : ScriptableObject
+{
+    public string abilityName;
+    public string description;
+    public Sprite icon;
+    public bool canLevel;
+
+    public virtual void CallAbility()
+    {
+        UIManager.Instance.AddAbilitySlot(this);
+    }
+}
+
+public class ActiveAbility : BaseAbility
+{
+    public GameObject handlerPrefab;
+
+    public PassiveAbility[] supportAbilities;
+
+    public override void CallAbility()
+    {
+        GameObject handlerGO = Instantiate(handlerPrefab, GameManager.Instance.Player.transform.Find("AbilityHolder"));
+        ActiveAbilityHandler handler = handlerGO.GetComponent<ActiveAbilityHandler>();
+        foreach (PassiveAbility ability in supportAbilities)
+        {
+            LevelupManager.Instance.abilities.Add(ability);
+        }
+        LevelupManager.Instance.abilities.Remove(this);
+
+        base.CallAbility();
+    }
+}
+
+public class PassiveAbility : BaseAbility
+{
+    public float modifier;
+    public delegate void PassiveAbilityEvent();
+    public event PassiveAbilityEvent passiveAbilityEvent;
+
+    public override void CallAbility()
+    {
+        passiveAbilityEvent?.Invoke();
+        base.CallAbility();
+    }
+}
+
+
+</code></pre>
+                    </div>
+                </li>
+                <li>
+                    <h3>Ability Slection Example</h3>
+                    <video controls>
+                        <source src="./media/Hallowfall/PlayerAbilityShowcase.mp4" type="video/mp4">
+                    </video>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="topicContainer">
+
+            <h2>Skill tree</h2>
+            <p>
+            <ul class="bulletPointList">
+                <li>Developed a skill tree system using ScriptableObject based nodes to
+                    define upgrade data, prerequisites, and logic.</li>
+                <li>Supports both active and passive
+                    upgrades through event-driven architecture.</li>
+                <li>Implements node dependencies and unlock paths to guide progression while allowing
+                    branching
+                    and non-linear choices.</li>
+                <li>Each skill node encapsulates it's data (name, description, cost, etc.), and
+                    effect callbacks for clean separation of data and logic.</li>
+                <li>Integrated with the game’s UI using Unity’s UI Toolkit / Canvas system for dynamic node
+                    highlighting, unlock effects, and tooltips.</li>
+                <li>Designed with scalability in mind, new skills and branches can be added by creating new
+                    node prefabs without code changes.</li>
+
+            </ul>
+
+            <ul class="visualDemo">
+
+                <li>
+                    <div>
+                        <h3>Skill Tree Showcase</h3>
+                        <video controls>
+                            <source src="./media/Hallowfall/SkillTreeShowcase.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <h3>Skill Logic Implementation</h3>
+                        <pre><code class="language-csharp">
+                            public class SkillSO : ScriptableObject
+{
+    public string skillName;
+    public string skillDescription;
+    public Sprite icon;
+    public int skillCost;
+    public int id;
+
+    public virtual void ApplySkill(PlayerController playerController)
+    {
+       //Call Event From SkillEvents
+    }
+
+
+}
+
+public static class SkillEvents
+{
+    //
+    public static event Action OnDoubleDashSkillUnlocked;
+    public static void UnlockDoubleDash() => OnDoubleDashSkillUnlocked?.Invoke();
+    //
+
+    //
+    public static event Action OnCounterSkillUnlocked;
+    public static void UnlockCounter() => OnCounterSkillUnlocked?.Invoke();
+    //
+
+    //
+    public static event Action OnPerfectTimingSkillUnlocked;
+    public static void UnlockPerfectTiming() => OnPerfectTimingSkillUnlocked?.Invoke();
+    //
+
+    //
+    public static event Action OnEchoingSteelSkillUnlocked;
+    public static void UnlockEchoingSteel() => OnEchoingSteelSkillUnlocked?.Invoke();
+    //
+
+    //
+    public static event Action OnMomentumShiftSkillUnlocked;
+    public static void UnlockMomentumShift() => OnMomentumShiftSkillUnlocked?.Invoke();
+    //
+
+    //
+    public static event Action OnCounterSurgeSkillUnlocked;
+    public static void UnlockCounterSurge() => OnCounterSurgeSkillUnlocked?.Invoke();
+    //
+
+    //
+    public static event Action OnBladeReflectionSkillUnlocked;
+    public static void UnlockBladeReflection() => OnBladeReflectionSkillUnlocked?.Invoke();
+    //
+
+}
+
+
+</code></pre>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <h3>Skill Tree Implementation</h3>
+                        <pre><code class="language-csharp">
+public class SkillNode : MonoBehaviour
+{
+    [Header("Node Dependencies")]
+    [SerializeField] private SkillNode[] previousNodes;
+    [SerializeField] private SkillNode[] nextNodes;
+
+    [SerializeField] private SkillSO skillSO;
+    private SkillTreeManager skillManager;
+
+    [Header("Visuals")]
+    [SerializeField] private Image outlineImage;
+    [SerializeField] private Transform linkHolder;
+    [SerializeField] private Image skillImage;
+
+    private List<Image> links = new List<Image>();
+
+    private bool isUnlocked = false;
+    private bool canBeUnlocked = false;
+
+    public bool IsUnlocked { get => isUnlocked; private set => isUnlocked = value; }
+
+    private void Awake()
+    {
+        skillManager = GetComponentInParent<SkillTreeManager>();
+
+        foreach (Transform child in linkHolder)
+        {
+            Image image = child.GetComponent<Image>();
+            if (image != null)
+            {
+                links.Add(image);
+            }
+        }
+    }
+
+    private void Start()
+    {
+        CheckPreviousNodes();
+        skillImage.sprite = skillSO.icon;
+    }
+
+    public void CheckPreviousNodes()
+    {
+        bool allUnlocked = true;
+
+        foreach (var node in previousNodes)
+        {
+            if (!node.IsUnlocked)
+            {
+                allUnlocked = false;
+                break;
+            }
+        }
+
+        canBeUnlocked = allUnlocked && !isUnlocked;
+        UpdateNodeVisuals();
+    }
+
+    public void Unlock()
+    {
+        IsUnlocked = true;
+        canBeUnlocked = false;
+
+        foreach (var node in nextNodes)
+        {
+            node.CheckPreviousNodes();
+        }
+
+        UpdateLinkColors(true);
+        skillManager.UpdateSkullsText();
+        UpdateNodeVisuals();
+    }
+
+    private void UpdateLinkColors(bool shouldHighlight)
+    {
+        Color targetColor = shouldHighlight ? new Color(1f, 0.5f, 0f) : Color.white;
+
+        foreach (var link in links)
+        {
+            link.color = targetColor;
+        }
+    }
+
+    private void UpdateNodeVisuals()
+    {
+        if (isUnlocked)
+        {
+            skillImage.color = Color.white;
+            outlineImage.color = Color.green;
+        }
+        else if (canBeUnlocked)
+        {
+            skillImage.color = new Color(1, 1, 1, 0.7f);
+            outlineImage.color = Color.yellow;
+        }
+        else
+        {
+            skillImage.color = new Color(1, 1, 1, 0.1f);
+            outlineImage.color = Color.red;
+        }
+    }
+
+    public void OnNodeClicked()
+    {
+        if (!canBeUnlocked || isUnlocked) return;
+
+        int newSkullCount = skillManager.LoadSkullCount() - skillSO.skillCost;
+        if (newSkullCount < 0) return;
+
+        Unlock();
+        SaveSystem.UpdatePlayerSkulls(newSkullCount);
+        skillManager.UpdateSkullsText();
+        SaveSystem.UpdateSkillTree(skillSO.id, true);
+    }
+
+    public void OnSkillHover()
+    {
+        skillManager.ShowDescriptionFrame(transform.position, skillSO.skillName, skillSO.skillDescription, skillSO.skillCost);
+    }
+
+    public void OnSkillHoverClear()
+    {
+        skillManager.HideDescriptionFrame();
+    }
+
+    public void ResetSkill()
+    {
+        isUnlocked = false;
+        canBeUnlocked = false;
+        UpdateLinkColors(false);
+        CheckPreviousNodes();
+        SaveSystem.UpdateSkillTree(skillSO.id, false);
+    }
+
+    public void UnlockBasedOfSkillTreeData(int[] skillTreeNodesData)
+    {
+        if (skillSO.id >= 0 && skillSO.id < skillTreeNodesData.Length && skillTreeNodesData[skillSO.id] == 1)
+        {
+            Unlock();
+        }
+    }
+
+}
+
+public class SkillTreeManager : MonoBehaviour
+{
+    [Header("UI Dependencies")]
+
+    [SerializeField] GameObject skillDescriptionFrame;
+    [SerializeField] TextMeshProUGUI descriptionText;
+    [SerializeField] TextMeshProUGUI nameText;
+    [SerializeField] TextMeshProUGUI costText;
+    [SerializeField] TextMeshProUGUI resetCostText;
+    [SerializeField] TextMeshProUGUI skullText;
+
+    private SkillNode[] skillNodes;
+
+    [SerializeField] private int resetCost = 100;
+
+    public SkillNode[] SkillNodes { get => skillNodes; }
+
+    private void Awake()
+    {
+        skillNodes = GetComponentsInChildren<SkillNode>();
+    }
+    private void Start()
+    {
+        resetCostText.text = resetCost.ToString();
+
+    }
+    public void ShowDescriptionFrame(Vector3 pos, string name, string description, int cost)
+    {
+
+        skillDescriptionFrame.transform.position = pos + new Vector3(130, 70, 0);
+        nameText.text = name;
+        descriptionText.text = description;
+        costText.text = cost.ToString();
+
+        skillDescriptionFrame.SetActive(true);
+    }
+
+    public void HideDescriptionFrame()
+    {
+        skillDescriptionFrame.SetActive(false);
+    }
+
+    public void ResetAllSkills()
+    {
+        int temp = LoadSkullCount() - resetCost;
+        if (temp >= 0)
+        {
+            foreach (SkillNode skillNode in SkillNodes)
+            {
+                skillNode.ResetSkill();
+            }
+            SaveSystem.UpdatePlayerSkulls(temp);
+            UpdateSkullsText();
+        }
+
+    }
+
+    public int LoadSkullCount()
+    {
+        GameData gameData = SaveSystem.LoadGameData();
+        if (gameData != null)
+        {
+            return gameData.skullCount;
+        }
+        else return 0;
+    }
+
+
+    public void UpdateSkullsText()
+    {
+        skullText.text = LoadSkullCount().ToString();
+    }
+
+    public void ApplySavedSkillTree(int[] savedData)
+    {
+        foreach (var node in SkillNodes)
+        {
+            node.UnlockBasedOfSkillTreeData(savedData);
+        }
+    }
+}
+</code></pre>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <p> &copy; BY Arya Hosseini.</p>
+        <p> I claim no rights to the assets used within my projects.</p>
+    </div>
+
+    <script src="./prism/prism.js"></script>
+
+</body>
+
+
+</html>
